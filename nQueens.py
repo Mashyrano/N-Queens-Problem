@@ -1,15 +1,5 @@
 import copy
 
-arr  = [[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0]
-		]
-
 # X-axis
 def checkLeft(arr,i,j):
 	if j > 0:
@@ -119,7 +109,4 @@ def solve(arr, row, solutions):
 			continue
 		solve(cpyArr, row+1, solutions)
 
-#solve(arr, 0)
-
-#print(len(solutions))
 

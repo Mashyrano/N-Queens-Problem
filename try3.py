@@ -1,6 +1,5 @@
 import pygame
 import numpy as np
-from PIL import Image
 import nQueens
 
 pygame.init()
@@ -58,8 +57,10 @@ while run:
 			#pygame.draw.rect(win, BLACK, (row*BLOCK_SIZE, column*BLOCK_SIZE ,BLOCK_SIZE,BLOCK_SIZE), 1)
 			# draw input bar
 			pygame.draw.rect(win, GREEN, (0, BLOCK_SIZE*queens+queens ,BLOCK_SIZE*queens+queens,50))
-			text = font1.render('Press \'N\' for next solution: ',1,(0,0,0))
-			win.blit(text, (0, BLOCK_SIZE*queens+10))
+			text = font1.render('Press \'N\' and \'P\' to toggle btwn solutions:',1,(0,0,0))
+			text2 = font1.render(str(solution) + '\\' + str(len(solutions)),1,(0,0,0))
+			win.blit(text, (0, BLOCK_SIZE*queens+queens+5))
+			win.blit(text2, (0, BLOCK_SIZE*queens+queens+25))
 
 
 	for event in pygame.event.get():
@@ -69,6 +70,10 @@ while run:
 			if event.key == pygame.K_n:
 				if solution < len(solutions)-1:
 					solution += 1
+					CLICKED_ARRAY = solutions[solution]
+			if event.key == pygame.K_p:
+				if solution > 0:
+					solution -= 1
 					CLICKED_ARRAY = solutions[solution]
 
 			
