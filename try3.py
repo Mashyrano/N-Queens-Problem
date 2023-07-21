@@ -5,8 +5,9 @@ import nQueens
 
 pygame.init()
 
-BLOCK_SIZE = 70
-dimension = BLOCK_SIZE*8+7
+BLOCK_SIZE = 40
+queens = 7
+dimension = BLOCK_SIZE*queens+queens
 win = pygame.display.set_mode((dimension,dimension+50))
 pygame.display.set_caption('N Queens Problem')
 
@@ -24,7 +25,7 @@ im1 = pygame.transform.scale(im1, DEFAULT_IMAGE_SIZE)
 #font
 font1 = pygame.font.SysFont('microsofthimalaya', 25)
 
-CLICKED_ARRAY = np.zeros((8,8))
+CLICKED_ARRAY = np.zeros((queens,queens))
 solutions = list()
 solution = 0
 nQueens.solve(CLICKED_ARRAY, 0, solutions)
@@ -56,9 +57,9 @@ while run:
 			
 			#pygame.draw.rect(win, BLACK, (row*BLOCK_SIZE, column*BLOCK_SIZE ,BLOCK_SIZE,BLOCK_SIZE), 1)
 			# draw input bar
-			pygame.draw.rect(win, GREEN, (0, BLOCK_SIZE*8+7 ,BLOCK_SIZE*8+7,50))
+			pygame.draw.rect(win, GREEN, (0, BLOCK_SIZE*queens+queens ,BLOCK_SIZE*queens+queens,50))
 			text = font1.render('Press \'N\' for next solution: ',1,(0,0,0))
-			win.blit(text, (0, BLOCK_SIZE*8+10))
+			win.blit(text, (0, BLOCK_SIZE*queens+10))
 
 
 	for event in pygame.event.get():
@@ -66,7 +67,7 @@ while run:
 			run = False
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_n:
-				if solution < 91:
+				if solution < len(solutions)-1:
 					solution += 1
 					CLICKED_ARRAY = solutions[solution]
 
