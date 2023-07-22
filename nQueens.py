@@ -95,18 +95,23 @@ def checkAttack(arr,i, j):
 
 solutions = list()
 
-def solve(arr, row, solutions):
+def solve(arr, row, solutions, columns):
 	if row >= len(arr):
 		solutions.append(arr)
 		return
 
 	for i in range(len(arr)):
+		if columns[i] == 1:
+			continue
 		cpyArr = copy.deepcopy(arr)
+		cpyColumns = copy.deepcopy(columns)
 		cpyArr[row][i] = 1
+		
 		#print(cpyArr)
 		attacked = not checkAttack(cpyArr,row, i)
 		if attacked:
 			continue
-		solve(cpyArr, row+1, solutions)
+		cpyColumns[i] = 1
+		solve(cpyArr, row+1, solutions, cpyColumns)
 
 

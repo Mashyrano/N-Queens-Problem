@@ -4,10 +4,10 @@ import nQueens
 
 pygame.init()
 
-BLOCK_SIZE = 40
-queens = 7
-dimension = BLOCK_SIZE*queens+queens
-win = pygame.display.set_mode((dimension,dimension+50))
+queens = 8
+dimension = 600
+BLOCK_SIZE = dimension/queens
+win = pygame.display.set_mode((dimension,dimension+60))
 pygame.display.set_caption('N Queens Problem')
 
 BLACK = (181,136,99)
@@ -25,9 +25,10 @@ im1 = pygame.transform.scale(im1, DEFAULT_IMAGE_SIZE)
 font1 = pygame.font.SysFont('microsofthimalaya', 25)
 
 CLICKED_ARRAY = np.zeros((queens,queens))
+columns = np.zeros(queens)
 solutions = list()
 solution = 0
-nQueens.solve(CLICKED_ARRAY, 0, solutions)
+nQueens.solve(CLICKED_ARRAY, 0, solutions,columns)
 
 CLICKED_ARRAY = solutions[solution]
 
@@ -58,7 +59,7 @@ while run:
 			# draw input bar
 			pygame.draw.rect(win, GREEN, (0, BLOCK_SIZE*queens+queens ,BLOCK_SIZE*queens+queens,50))
 			text = font1.render('Press \'N\' and \'P\' to toggle btwn solutions:',1,(0,0,0))
-			text2 = font1.render(str(solution) + '\\' + str(len(solutions)),1,(0,0,0))
+			text2 = font1.render(str(solution + 1) + '\\' + str(len(solutions)),1,(0,0,0))
 			win.blit(text, (0, BLOCK_SIZE*queens+queens+5))
 			win.blit(text2, (0, BLOCK_SIZE*queens+queens+25))
 
