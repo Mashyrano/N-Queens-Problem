@@ -5,28 +5,28 @@ def checkLeft(arr,i,j):
 	if j > 0:
 		for x in range(j-1, -1, -1):
 			if arr[i][x] == 1:
-				return False
-	return True
+				return (i,x)
+	return False
 def checkRight(arr,i,j):
 	if j < len(arr)-1:
 		for x in range(j+1, len(arr)):
 			if arr[i][x] == 1:
-				return False
-	return True
+				return (i,x)
+	return False
 
 # Y-axis
 def checkAbove(arr,i,j):
 	if i > 0:
 		for x in range(i-1, -1, -1):
 			if arr[x][j] == 1:
-				return False
-	return True
+				return (x,j)
+	return False
 def checkBelow(arr,i,j):
 	if i < len(arr)-1:
 		for x in range(i+1, len(arr)):
 			if arr[x][j] == 1:
-				return False
-	return True
+				return (x,j)
+	return False
 
 # Upper Diagonals
 def checkUpperLeftDiagonal(arr,i,j):
@@ -35,20 +35,20 @@ def checkUpperLeftDiagonal(arr,i,j):
 	if i > 0 and j > 0:
 		while x >= 0 and y >= 0:
 			if arr[x][y] == 1:
-				return False			
+				return (x,y)			
 			x -= 1
 			y -= 1
-	return True
+	return False
 def checkUpperRightDiagonal(arr,i,j):
 	x = i-1
 	y = j+1
 	if i > 0 and j < len(arr) - 1:
 		while x >= 0 and y < len(arr):
 			if arr[x][y] == 1:
-				return False			
+				return (x,y)			
 			x -= 1
 			y += 1
-	return True
+	return False
 
 # Lower Diagonals
 
@@ -58,40 +58,40 @@ def checkLowerLeftDiagonal(arr,i,j):
 	if j > 0 and i < len(arr) - 1:
 		while y >= 0 and x < len(arr):
 			if arr[x][y] == 1:
-				return False
+				return (x,y)
 			x += 1
 			y -= 1
-	return True
+	return False
 def checkLowerRightDiagonal(arr,i,j):
 	x = i+1
 	y = j+1
 	if i < len(arr) - 1 and j  < len(arr) - 1:
 		while x < len(arr) and y < len(arr):
 			if arr[x][y] == 1:
-				return False
+				return (x,y)
 			x += 1
 			y += 1
-	return True
+	return False
 
 def checkAttack(arr,i, j):
-	# returns True when not attacked : False otherwise
-	if not checkLeft(arr, i, j):
-		return False
-	if not checkRight(arr, i, j):
-		return False
-	if not checkAbove(arr, i, j):
-		return False
-	if not checkBelow(arr, i, j):
-		return False
-	if not checkUpperLeftDiagonal(arr, i, j):
-		return False
-	if not checkUpperRightDiagonal(arr, i, j):
-		return False
-	if not checkLowerLeftDiagonal(arr, i, j):
-		return False
-	if not checkLowerRightDiagonal(arr, i, j):
-		return False
-	return True
+	# returns False when not attacked : True otherwise
+	if checkLeft(arr, i, j):
+		return checkLeft(arr, i, j)
+	if checkRight(arr, i, j):
+		return checkRight(arr, i, j)
+	if checkAbove(arr, i, j):
+		return checkAbove(arr, i, j)
+	if checkBelow(arr, i, j):
+		return checkBelow(arr, i, j)
+	if checkUpperLeftDiagonal(arr, i, j):
+		return checkUpperLeftDiagonal(arr, i, j)
+	if checkUpperRightDiagonal(arr, i, j):
+		return checkUpperRightDiagonal(arr, i, j)
+	if checkLowerLeftDiagonal(arr, i, j):
+		return checkLowerLeftDiagonal(arr, i, j)
+	if checkLowerRightDiagonal(arr, i, j):
+		return checkLowerRightDiagonal(arr, i, j)
+	return False
 
 solutions = list()
 
@@ -108,7 +108,7 @@ def solve(arr, row, solutions, columns):
 		cpyArr[row][i] = 1
 		
 		#print(cpyArr)
-		attacked = not checkAttack(cpyArr,row, i)
+		attacked = checkAttack(cpyArr,row, i)
 		if attacked:
 			continue
 		cpyColumns[i] = 1
