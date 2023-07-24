@@ -4,7 +4,7 @@ import nQueens
 
 pygame.init()
 
-queens = 8
+queens = 10
 dimension = 600
 BLOCK_SIZE = dimension/queens
 win = pygame.display.set_mode((dimension+queens,dimension+60))
@@ -74,7 +74,7 @@ def main():
 					if solution < len(solutions)-1:
 						solution += 1
 						CLICKED_ARRAY = solutions[solution]
-						print(CLICKED_ARRAY)
+						#print(CLICKED_ARRAY)
 				if event.key == pygame.K_p:
 					if solution > 0:
 						solution -= 1

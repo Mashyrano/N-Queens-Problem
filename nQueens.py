@@ -74,24 +74,28 @@ def checkLowerRightDiagonal(arr,i,j):
 	return False
 
 def checkAttack(arr,i, j):
+	attackers = list()
 	# returns False when not attacked : True otherwise
 	if checkLeft(arr, i, j):
-		return checkLeft(arr, i, j)
+		attackers.append(checkLeft(arr, i, j))
 	if checkRight(arr, i, j):
-		return checkRight(arr, i, j)
+		attackers.append(checkRight(arr, i, j))
 	if checkAbove(arr, i, j):
-		return checkAbove(arr, i, j)
+		attackers.append(checkAbove(arr, i, j))
 	if checkBelow(arr, i, j):
-		return checkBelow(arr, i, j)
+		attackers.append(checkBelow(arr, i, j))
 	if checkUpperLeftDiagonal(arr, i, j):
-		return checkUpperLeftDiagonal(arr, i, j)
+		attackers.append(checkUpperLeftDiagonal(arr, i, j))
 	if checkUpperRightDiagonal(arr, i, j):
-		return checkUpperRightDiagonal(arr, i, j)
+		attackers.append(checkUpperRightDiagonal(arr, i, j))
 	if checkLowerLeftDiagonal(arr, i, j):
-		return checkLowerLeftDiagonal(arr, i, j)
+		attackers.append(checkLowerLeftDiagonal(arr, i, j))
 	if checkLowerRightDiagonal(arr, i, j):
-		return checkLowerRightDiagonal(arr, i, j)
-	return False
+		attackers.append(checkLowerRightDiagonal(arr, i, j))
+
+	if len(attackers) == 0:
+		return False
+	return attackers
 
 solutions = list()
 
